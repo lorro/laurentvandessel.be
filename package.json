@@ -13,11 +13,11 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@astrojs/mdx": "5.0.0-beta.5",
+    "@astrojs/mdx": "^5.0.0-beta.7",
     "@astrojs/sitemap": "^3.7.0",
-    "@astrojs/vue": "6.0.0-beta.1",
+    "@astrojs/vue": "^6.0.0-beta.1",
     "@fontsource-variable/nunito-sans": "^5.1.0",
-    "astro": "6.0.0-beta.9",
+    "astro": "^6.0.0-beta.11",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.503.0",
@@ -26,7 +26,7 @@
     "vue": "^3.5.0"
   },
   "devDependencies": {
-    "@astrojs/netlify": "7.0.0-beta.9",
+    "@astrojs/netlify": "^7.0.0-beta.9",
     "@eslint/js": "^9.17.0",
     "@tailwindcss/vite": "^4.0.0",
     "eslint": "^9.17.0",

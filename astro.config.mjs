@@ -1,5 +1,5 @@
 import { defineConfig, envField } from 'astro/config';
-import netlify from '@astrojs/netlify/functions';
+import netlify from '@astrojs/netlify';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import vue from '@astrojs/vue';
@@ -29,6 +29,9 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    ssr: {
+      noExternal: ['@astrojs/netlify'],
+    },
   },
 
   markdown: {
