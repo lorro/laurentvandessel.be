@@ -1,11 +1,12 @@
 import { defineConfig, envField } from 'astro/config';
+import netlify from '@astrojs/netlify/functions';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import vue from '@astrojs/vue';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  output: 'static',
+  output: 'server',
   site: 'https://laurentvandessel.be',
   base: '/',
 
@@ -23,6 +24,8 @@ export default defineConfig({
     mdx(),
     sitemap(),
   ],
+
+  adapter: netlify(),
 
   vite: {
     plugins: [tailwindcss()],
