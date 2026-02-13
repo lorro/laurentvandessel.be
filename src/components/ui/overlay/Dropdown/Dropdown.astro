@@ -6,24 +6,10 @@
 import { cn } from '@/lib/cn';
 import Icon from '../../primitives/Icon/Icon.astro';
 
-interface DropdownItem {
-  label: string;
-  href?: string;
-  icon?: string;
-  disabled?: boolean;
-  separator?: boolean;
-}
-
-interface Props {
-  items: DropdownItem[];
-  align?: 'start' | 'end';
-  class?: string;
-}
-
 const { items, align = 'start', class: className } = Astro.props;
 
 // Map common action names to icons
-const iconMap: Record<string, string> = {
+const iconMap = {
   edit: 'file-text',
   copy: 'copy',
   share: 'arrow-up-right',
@@ -92,13 +78,13 @@ const iconMap: Record<string, string> = {
 
 <script>
   function initDropdowns() {
-    document.querySelectorAll<HTMLElement>('[data-dropdown]').forEach((dropdown) => {
+    document.querySelectorAll('[data-dropdown]').forEach((dropdown) => {
       if (dropdown.dataset.dropdownInit) return;
       dropdown.dataset.dropdownInit = 'true';
 
       const trigger = dropdown.querySelector('[data-dropdown-trigger]');
-      const menu = dropdown.querySelector<HTMLElement>('[data-dropdown-menu]');
-      const items = dropdown.querySelectorAll<HTMLElement>('[data-dropdown-item]');
+      const menu = dropdown.querySelector('[data-dropdown-menu]');
+      const items = dropdown.querySelectorAll('[data-dropdown-item]');
       let isOpen = false;
       let focusedIndex = -1;
 
@@ -117,7 +103,7 @@ const iconMap: Record<string, string> = {
         focusedIndex = -1;
       }
 
-      function focusItem(index: number) {
+      function focusItem(index) {
         if (index < 0) index = items.length - 1;
         if (index >= items.length) index = 0;
         focusedIndex = index;
@@ -134,7 +120,7 @@ const iconMap: Record<string, string> = {
       });
 
       trigger?.addEventListener('keydown', (event) => {
-        const e = event as KeyboardEvent;
+        const e = event;
         if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
           e.preventDefault();
           open();
@@ -142,7 +128,7 @@ const iconMap: Record<string, string> = {
       });
 
       menu?.addEventListener('keydown', (event) => {
-        const e = event as KeyboardEvent;
+        const e = event;
         switch (e.key) {
           case 'ArrowDown':
             e.preventDefault();
@@ -163,7 +149,7 @@ const iconMap: Record<string, string> = {
           case 'Escape':
             e.preventDefault();
             close();
-            (trigger as HTMLElement)?.focus();
+            trigger?.focus();
             break;
           case 'Tab':
             close();
@@ -172,7 +158,7 @@ const iconMap: Record<string, string> = {
       });
 
       document.addEventListener('click', (e) => {
-        if (!dropdown.contains(e.target as Node)) close();
+        if (!dropdown.contains(e.target)) close();
       });
 
       document.addEventListener('keydown', (e) => {

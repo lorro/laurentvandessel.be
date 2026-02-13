@@ -6,14 +6,6 @@
 import { cn } from '@/lib/cn';
 import Icon from '../../primitives/Icon/Icon.astro';
 
-interface Props {
-  id: string;
-  title?: string;
-  description?: string;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  class?: string;
-}
-
 const { id, title, description, size = 'md', class: className } = Astro.props;
 
 const sizes = {
@@ -102,25 +94,25 @@ const sizes = {
 
 <script>
   function initDialogs() {
-    document.querySelectorAll<HTMLElement>('[data-dialog]').forEach((dialog) => {
+    document.querySelectorAll('[data-dialog]').forEach((dialog) => {
       if (dialog.dataset.dialogInit) return;
       dialog.dataset.dialogInit = 'true';
 
-      const backdrop = dialog.querySelector<HTMLElement>('[data-dialog-backdrop]');
-      const panel = dialog.querySelector<HTMLElement>('[data-dialog-panel]');
+      const backdrop = dialog.querySelector('[data-dialog-backdrop]');
+      const panel = dialog.querySelector('[data-dialog-panel]');
       const closeButtons = dialog.querySelectorAll('[data-dialog-close]');
 
-      let previousActiveElement: HTMLElement | null = null;
+      let previousActiveElement = null;
 
-      function getFocusableElements(): HTMLElement[] {
+      function getFocusableElements() {
         return Array.from(
-          panel?.querySelectorAll<HTMLElement>(
+          panel?.querySelectorAll(
             'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
           ) || []
         ).filter((el) => !el.hasAttribute('disabled'));
       }
 
-      function trapFocus(e: KeyboardEvent) {
+      function trapFocus(e) {
         if (e.key !== 'Tab') return;
 
         const focusable = getFocusableElements();
@@ -143,7 +135,7 @@ const sizes = {
       }
 
       function open() {
-        previousActiveElement = document.activeElement as HTMLElement;
+        previousActiveElement = document.activeElement;
         dialog.classList.remove('hidden');
 
         requestAnimationFrame(() => {
@@ -177,8 +169,8 @@ const sizes = {
       }
 
       // Expose methods on the element
-      (dialog as HTMLElement & { open?: () => void; close?: () => void }).open = open;
-      (dialog as HTMLElement & { open?: () => void; close?: () => void }).close = close;
+      dialog.open = open;
+      dialog.close = close;
 
       // Close button handlers
       closeButtons.forEach((btn) => {
@@ -199,14 +191,13 @@ const sizes = {
   }
 
   // Global function to open dialogs by ID
-  type DialogElement = HTMLElement & { open?: () => void; close?: () => void };
-  (window as Window & { openDialog?: (id: string) => void }).openDialog = (id: string) => {
-    const dialog = document.getElementById(id) as DialogElement | null;
+  window.openDialog = (id) => {
+    const dialog = document.getElementById(id);
     dialog?.open?.();
   };
 
-  (window as Window & { closeDialog?: (id: string) => void }).closeDialog = (id: string) => {
-    const dialog = document.getElementById(id) as DialogElement | null;
+  window.closeDialog = (id) => {
+    const dialog = document.getElementById(id);
     dialog?.close?.();
   };
 

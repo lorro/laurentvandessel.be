@@ -3,22 +3,9 @@
  * Pagination Component
  * Page navigation with prev/next and numbered pages.
  */
-import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import { paginationItemVariants } from './pagination.variants';
 import Icon from '../../primitives/Icon/Icon.astro';
-
-interface Props extends HTMLAttributes<'nav'> {
-  /** Current active page (1-indexed) */
-  currentPage: number;
-  /** Total number of pages */
-  totalPages: number;
-  /** Base URL for page links (page number appended) */
-  baseUrl?: string;
-  /** Maximum number of visible page buttons */
-  maxVisible?: number;
-  size?: 'sm' | 'md' | 'lg';
-}
 
 const {
   currentPage,
@@ -43,12 +30,12 @@ const {
  *                  than `max` entries.
  * @returns An array of page numbers and `'...'` separators.
  */
-function getPageRange(current: number, total: number, max: number): (number | '...')[] {
+function getPageRange(current, total, max) {
   if (total <= max) {
     return Array.from({ length: total }, (_, i) => i + 1);
   }
 
-  const pages: (number | '...')[] = [];
+  const pages = [];
   const half = Math.floor(max / 2);
   let start = Math.max(1, current - half);
   let end = Math.min(total, start + max - 1);

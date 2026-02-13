@@ -1,14 +1,6 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import { generateId } from '@/lib/utils';
-
-interface Props extends HTMLAttributes<'input'> {
-  label?: string;
-  description?: string;
-  error?: string;
-  variant?: 'default' | 'card';
-}
 
 const { label, description, error, variant = 'default', class: className, id, disabled, ...attrs } = Astro.props;
 

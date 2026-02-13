@@ -1,23 +1,7 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import { generateId } from '@/lib/utils';
 import { selectVariants } from './select.variants';
-
-interface Option {
-  value: string;
-  label: string;
-  disabled?: boolean;
-}
-
-interface Props extends HTMLAttributes<'select'> {
-  label?: string;
-  error?: string;
-  hint?: string;
-  size?: 'sm' | 'md' | 'lg';
-  options: Option[];
-  placeholder?: string;
-}
 
 const {
   label,

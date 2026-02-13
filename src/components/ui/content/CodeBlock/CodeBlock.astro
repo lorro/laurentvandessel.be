@@ -1,13 +1,6 @@
 ---
 import { cn } from '@/lib/cn';
 
-interface Props {
-  code: string;
-  filename?: string;
-  showLineNumbers?: boolean;
-  class?: string;
-}
-
 const {
   code,
   filename,
@@ -69,7 +62,7 @@ const codeId = `code-${Math.random().toString(36).slice(2, 9)}`;
 
 <script>
   function initCodeBlocks() {
-    document.querySelectorAll<HTMLButtonElement>('.copy-button').forEach((button) => {
+    document.querySelectorAll('.copy-button').forEach((button) => {
       button.addEventListener('click', async () => {
         const codeId = button.dataset.codeId;
         if (!codeId) return;

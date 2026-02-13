@@ -18,22 +18,7 @@
 import { cn } from '@/lib/cn';
 import Icon from '../../primitives/Icon/Icon.astro';
 
-interface Tab {
-  id: string;
-  label: string;
-  description?: string;
-  icon?: string;
-}
-
-interface Props {
-  tabs: Tab[];
-  defaultValue?: string;
-  class?: string;
-  /** Mobile dropdown variant: 'dropdown' (default) or 'sheet' (bottom sheet) */
-  mobileVariant?: 'dropdown' | 'sheet';
-}
-
-const props = Astro.props as Props;
+const props = Astro.props;
 const { tabs, defaultValue = props.tabs[0]?.id, class: className, mobileVariant = 'dropdown' } = props;
 const componentId = Math.random().toString(36).substring(2, 9);
 const defaultTab = tabs.find(t => t.id === defaultValue);
@@ -110,7 +95,7 @@ const defaultTab = tabs.find(t => t.id === defaultValue);
         class="hidden absolute z-50 w-full mt-2 p-1.5 rounded-xl border border-border bg-background/95 backdrop-blur-sm shadow-xl flex flex-col gap-0.5"
         data-vtab-panel-dropdown
       >
-        {tabs.map((tab: Tab) => {
+        {tabs.map((tab) => {
           const isActive = tab.id === defaultValue;
           return (
             <button
@@ -225,7 +210,7 @@ const defaultTab = tabs.find(t => t.id === defaultValue);
       </div>
       <!-- Options -->
       <div class="px-2 pb-4 flex flex-col gap-1">
-        {tabs.map((tab: Tab) => {
+        {tabs.map((tab) => {
           const isActive = tab.id === defaultValue;
           return (
             <button
@@ -335,7 +320,7 @@ const defaultTab = tabs.find(t => t.id === defaultValue);
       aria-orientation="vertical"
       aria-label="Vertical tabs"
     >
-      {tabs.map((tab: Tab) => {
+      {tabs.map((tab) => {
         const isActive = tab.id === defaultValue;
         return (
           <button
@@ -399,25 +384,25 @@ const defaultTab = tabs.find(t => t.id === defaultValue);
 
 <script>
   function initVerticalTabs() {
-    document.querySelectorAll<HTMLElement>('[data-vtabs]').forEach((container) => {
+    document.querySelectorAll('[data-vtabs]').forEach((container) => {
       if (container.dataset.vtabsInit) return;
       container.dataset.vtabsInit = 'true';
 
       const componentId = container.getAttribute('data-component-id');
       const defaultTab = container.getAttribute('data-default');
       const mobileVariant = container.getAttribute('data-mobile-variant') || 'dropdown';
-      const triggers = container.querySelectorAll<HTMLButtonElement>('[data-vtab-trigger]');
-      const contentElements = container.querySelectorAll<HTMLElement>('[data-tab-content]');
+      const triggers = container.querySelectorAll('[data-vtab-trigger]');
+      const contentElements = container.querySelectorAll('[data-tab-content]');
 
       // Mobile dropdown elements
-      const mobileTrigger = container.querySelector<HTMLButtonElement>('[data-vtab-trigger-mobile]');
-      const dropdownPanel = container.querySelector<HTMLElement>('[data-vtab-panel-dropdown]');
-      const dropdownBackdrop = container.querySelector<HTMLElement>('[data-vtab-dropdown-backdrop]');
-      const sheetPanel = container.querySelector<HTMLElement>('[data-vtab-panel-sheet]');
-      const sheetBackdrop = container.querySelector<HTMLElement>('[data-vtab-sheet-backdrop]');
-      const chevron = container.querySelector<SVGElement>('[data-vtab-chevron]');
-      const dropdownOptions = container.querySelectorAll<HTMLButtonElement>('[data-vtab-option]');
-      const sheetOptions = container.querySelectorAll<HTMLButtonElement>('[data-vtab-sheet-option]');
+      const mobileTrigger = container.querySelector('[data-vtab-trigger-mobile]');
+      const dropdownPanel = container.querySelector('[data-vtab-panel-dropdown]');
+      const dropdownBackdrop = container.querySelector('[data-vtab-dropdown-backdrop]');
+      const sheetPanel = container.querySelector('[data-vtab-panel-sheet]');
+      const sheetBackdrop = container.querySelector('[data-vtab-sheet-backdrop]');
+      const chevron = container.querySelector('[data-vtab-chevron]');
+      const dropdownOptions = container.querySelectorAll('[data-vtab-option]');
+      const sheetOptions = container.querySelectorAll('[data-vtab-sheet-option]');
 
       let isOpen = false;
       let _currentActiveTab = defaultTab;
@@ -434,7 +419,7 @@ const defaultTab = tabs.find(t => t.id === defaultValue);
         el.setAttribute('tabindex', '0');
       });
 
-      function toggleMobileDropdown(open?: boolean) {
+      function toggleMobileDropdown(open) {
         isOpen = open !== undefined ? open : !isOpen;
 
         if (mobileTrigger) {
@@ -476,7 +461,7 @@ const defaultTab = tabs.find(t => t.id === defaultValue);
         }
       }
 
-      function updateMobileTrigger(tab: { id: string; icon?: string; label: string; description?: string }) {
+      function updateMobileTrigger(tab) {
         const triggerLabel = container.querySelector('[data-vtab-trigger-label]');
         const triggerDesc = container.querySelector('[data-vtab-trigger-desc]');
 
@@ -581,7 +566,7 @@ const defaultTab = tabs.find(t => t.id === defaultValue);
         });
       }
 
-      function activateTab(id: string) {
+      function activateTab(id) {
         _currentActiveTab = id;
 
         // Update desktop triggers
@@ -675,7 +660,7 @@ const defaultTab = tabs.find(t => t.id === defaultValue);
       // Click outside to close dropdown
       document.addEventListener('click', (e) => {
         const dropdownContainer = container.querySelector('[data-vtab-dropdown-container]');
-        if (isOpen && dropdownContainer && !dropdownContainer.contains(e.target as Node)) {
+        if (isOpen && dropdownContainer && !dropdownContainer.contains(e.target)) {
           toggleMobileDropdown(false);
         }
       });

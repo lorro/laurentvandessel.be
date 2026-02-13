@@ -1,20 +1,6 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import { heroSectionVariants, heroBlobVariants } from './hero.variants';
-
-interface Props extends HTMLAttributes<'section'> {
-  /** Layout mode: centered single column or split two-column */
-  layout?: 'centered' | 'split';
-  /** Vertical padding size */
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  /** Show background grid pattern */
-  showGrid?: boolean;
-  /** Show decorative gradient blob */
-  showBlob?: boolean;
-  /** Blob position (only applies when showBlob is true) */
-  blobPosition?: 'left' | 'right' | 'center';
-}
 
 const {
   layout = 'centered',

@@ -1,18 +1,7 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import { isExternalUrl } from '@/lib/utils';
 import { buttonVariants } from './button.variants';
-
-interface Props extends HTMLAttributes<'button'> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'destructive';
-  size?: 'sm' | 'md' | 'lg';
-  loading?: boolean;
-  fullWidth?: boolean;
-  href?: string;
-  target?: string;
-  icon?: boolean;
-}
 
 const {
   variant = 'primary',

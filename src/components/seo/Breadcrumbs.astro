@@ -4,16 +4,6 @@ import JsonLd from './JsonLd.astro';
 import { createBreadcrumbSchema } from '@/lib/schema';
 import siteConfig from '@/config/site.config';
 
-interface BreadcrumbItem {
-  label: string;
-  href?: string;
-}
-
-interface Props {
-  items: BreadcrumbItem[];
-  class?: string;
-}
-
 const { items, class: className } = Astro.props;
 
 // Build schema items with full URLs

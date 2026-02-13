@@ -1,25 +1,7 @@
 ---
-/**
- * LandingLayout
- * Layout wrapper for landing-style pages (marketing, demo, showcase)
- * Uses Header + Footer with landing-specific configuration
- *
- * This layout is part of the "demo" layer - it can be optionally installed
- * via CLI for users who want the full landing page experience.
- */
 import BaseLayout from './BaseLayout.astro';
 import Header from '@/components/layout/Header.astro';
 import Footer from '@/components/layout/Footer.astro';
-
-interface Props {
-  title?: string;
-  description?: string;
-  image?: string;
-  imageAlt?: string;
-  noindex?: boolean;
-  nofollow?: boolean;
-  includeOrgSchema?: boolean;
-}
 
 const {
   title,
@@ -29,6 +11,7 @@ const {
   noindex = false,
   nofollow = false,
   includeOrgSchema = false,
+  showDeveloperVisual = true,
 } = Astro.props;
 ---
 
@@ -43,23 +26,24 @@ const {
 >
   <Header
     slot="header"
-    position="fixed"
-    size="lg"
-    showCta
-    cta={{ label: 'View Docs', href: 'https://docs.deployvelocity.com' }}
-    extraNav={[{ label: 'Features', href: '#features' }]}
-    actions={[
-      {
-        icon: 'github',
-        href: 'https://github.com/southwellmedia/velocity',
-        label: 'View on GitHub',
-        iconOnly: true,
-        target: '_blank',
-      },
-    ]}
+    position="sticky"
+    size="md"
+    showActiveState
+    showCta={false}
+    showThemeToggle={false}
   />
 
   <slot />
 
-  <Footer slot="footer" layout="simple" background="secondary" showCopyright={false} />
+  <Footer
+    slot="footer"
+    layout="simple"
+    copyright="© {year} Laurent Van Dessel. All rights reserved."
+    socialLinks={[
+      { platform: 'twitter', href: 'https://x.com/laurent_vd', label: 'Twitter' },
+      { platform: 'github', href: 'https://github.com/lorro', label: 'GitHub' },
+    ]}
+    showSocial={true}
+    hideLogo={true}
+  />
 </BaseLayout>

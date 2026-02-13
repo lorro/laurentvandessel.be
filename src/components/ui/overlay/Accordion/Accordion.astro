@@ -8,21 +8,6 @@ import { cn } from '@/lib/cn';
 import { accordionItemVariants, accordionTriggerVariants } from './accordion.variants';
 import Icon from '../../primitives/Icon/Icon.astro';
 
-interface AccordionItem {
-  title: string;
-  content: string;
-  defaultOpen?: boolean;
-}
-
-interface Props {
-  items: AccordionItem[];
-  variant?: 'default' | 'card';
-  size?: 'sm' | 'md' | 'lg';
-  /** Only allow one item open at a time */
-  exclusive?: boolean;
-  class?: string;
-}
-
 const { items, variant = 'default', size = 'md', exclusive = false, class: className } = Astro.props;
 
 // Generate unique group name for exclusive mode

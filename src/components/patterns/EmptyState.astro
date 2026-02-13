@@ -8,20 +8,6 @@ import { cn } from '@/lib/cn';
 import Icon from '@/components/ui/primitives/Icon/Icon.astro';
 import Button from '@/components/ui/form/Button/Button.astro';
 
-interface Props {
-  /** Icon name to display */
-  icon?: string;
-  /** Title text */
-  title: string;
-  /** Description text */
-  description?: string;
-  /** Primary action button label */
-  actionLabel?: string;
-  /** Primary action button href */
-  actionHref?: string;
-  class?: string;
-}
-
 const {
   icon = 'inbox',
   title,

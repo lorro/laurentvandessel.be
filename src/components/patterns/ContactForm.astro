@@ -4,12 +4,6 @@ import Textarea from '@/components/ui/form/Textarea/Textarea.astro';
 import Button from '@/components/ui/form/Button/Button.astro';
 import { cn } from '@/lib/cn';
 
-interface Props {
-  action?: string;
-  successMessage?: string;
-  class?: string;
-}
-
 const {
   action = '/api/contact',
   successMessage = 'Message sent successfully!',
@@ -67,9 +61,9 @@ const {
 
 <script>
   function initContactForm() {
-    const form = document.getElementById('contact-form') as HTMLFormElement;
-    const button = document.getElementById('submit-button') as HTMLButtonElement;
-    const message = document.getElementById('form-message') as HTMLDivElement;
+    const form = document.getElementById('contact-form');
+    const button = document.getElementById('submit-button');
+    const message = document.getElementById('form-message');
 
     if (!form || !button || !message) return;
 
@@ -99,7 +93,7 @@ const {
           const errors = data.errors
             ? Object.values(data.errors).flat().join(', ')
             : 'Something went wrong';
-          message.textContent = errors as string;
+          message.textContent = errors;
           message.className = 'text-sm text-destructive';
         }
       } catch {

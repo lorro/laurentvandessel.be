@@ -8,18 +8,6 @@ import { cn } from '@/lib/cn';
 import Card from '@/components/ui/data-display/Card/Card.astro';
 import Icon from '@/components/ui/primitives/Icon/Icon.astro';
 
-interface Props {
-  label: string;
-  value: string;
-  /** Optional trend indicator: 'up' | 'down' | 'neutral' */
-  trend?: 'up' | 'down' | 'neutral';
-  /** Trend description text (e.g., "+12% from last month") */
-  trendText?: string;
-  /** Icon name from the Icon component */
-  icon?: string;
-  class?: string;
-}
-
 const {
   label,
   value,

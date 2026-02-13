@@ -3,20 +3,8 @@
  * Progress Component
  * A bar indicator showing determinate or indeterminate progress.
  */
-import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import { progressTrackVariants, progressBarVariants } from './progress.variants';
-
-interface Props extends HTMLAttributes<'div'> {
-  /** Progress value between 0 and 100. Omit for indeterminate mode. */
-  value?: number;
-  /** Maximum value (default 100) */
-  max?: number;
-  variant?: 'default' | 'brand' | 'success' | 'warning' | 'error';
-  size?: 'sm' | 'md' | 'lg';
-  /** Show percentage label */
-  showLabel?: boolean;
-}
 
 const {
   value,

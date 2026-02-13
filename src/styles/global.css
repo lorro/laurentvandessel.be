@@ -10,12 +10,7 @@
 @import './tokens/spacing.css';
 
 /* Self-hosted fonts via Fontsource (CSP-safe, no external requests) */
-@import '@fontsource-variable/manrope';
-@import '@fontsource-variable/outfit';
-@import '@fontsource-variable/jetbrains-mono';
-
-/* Dark mode variant */
-@custom-variant dark (&:where(.dark, .dark *));
+@import '@fontsource-variable/nunito-sans';
 
 /* -------------------------------------------------------------------------
    Tailwind Theme Configuration
@@ -67,9 +62,9 @@
   --color-border-invert-strong: var(--border-invert-strong);
 
   /* Typography - Creates font-sans, font-display, font-mono utility classes */
-  --font-sans: 'Manrope Variable', 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Outfit Variable', 'Outfit', 'Manrope Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  --font-sans: 'Nunito Sans Variable', 'Nunito Sans', Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Nunito Sans Variable', 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', Consolas, 'Liberation Mono', monospace;
 
   /* Brand Colors in Tailwind theme */
   --color-brand-50: var(--brand-50);
@@ -236,28 +231,6 @@
     --color-primary-foreground: var(--surface-invert);
   }
 
-  .dark .invert-section {
-    color: var(--color-foreground);
-
-    --color-background: var(--surface-invert);
-    --color-foreground: var(--on-invert);
-    --color-foreground-secondary: var(--on-invert-secondary);
-    --color-foreground-muted: var(--on-invert-muted);
-    --color-foreground-subtle: var(--on-invert-muted);
-    --color-border: var(--border-invert);
-    --color-border-strong: var(--border-invert-strong);
-    --color-secondary: var(--surface-invert-secondary);
-    --color-secondary-foreground: var(--on-invert);
-    --color-secondary-hover: var(--surface-invert-tertiary);
-    --color-card: var(--surface-invert-secondary);
-    --color-card-border: var(--border-invert);
-    --color-muted: var(--surface-invert-secondary);
-    --color-muted-foreground: var(--on-invert-muted);
-    --color-ring: var(--on-invert);
-    --color-primary: var(--on-invert);
-    --color-primary-foreground: var(--surface-invert);
-  }
-
   /* Container */
   .container {
     width: 100%;
@@ -367,12 +340,6 @@
       linear-gradient(to right, var(--gray-200) 1px, transparent 1px),
       linear-gradient(to bottom, var(--gray-200) 1px, transparent 1px);
     background-size: 40px 40px;
-  }
-
-  .dark .bg-grid-pattern {
-    background-image:
-      linear-gradient(to right, var(--gray-800) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--gray-800) 1px, transparent 1px);
   }
 
   /* Animations */
@@ -847,11 +814,6 @@
       opacity var(--transition-fast) var(--ease-out),
       transform var(--transition-fast) var(--ease-out),
       visibility var(--transition-fast) var(--ease-out);
-  }
-
-  .dark .tooltip-bubble {
-    background-color: var(--gray-100);
-    color: var(--gray-900);
   }
 
   /* Position: Top (default) */

@@ -3,11 +3,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/layout/Header.astro';
 import Footer from '@/components/layout/Footer.astro';
 import BlogCard from '@/components/blog/BlogCard.astro';
-import Button from '@/components/ui/form/Button/Button.astro';
 import Badge from '@/components/ui/data-display/Badge/Badge.astro';
 import Icon from '@/components/ui/primitives/Icon/Icon.astro';
-import Input from '@/components/ui/form/Input/Input.astro';
-import CTA from '@/components/ui/marketing/CTA/CTA.astro';
 import { Hero } from '@/components/hero';
 import { getCollection } from 'astro:content';
 
@@ -28,7 +25,7 @@ const nonFeaturedPosts = posts.filter((post) => !post.data.featured);
 // If ALL posts are featured, show them all in the main listing too (to avoid empty section)
 const regularPosts = nonFeaturedPosts.length > 0 ? nonFeaturedPosts : posts;
 
-const getPostUrl = (postId: string) => {
+const getPostUrl = (postId) => {
   // Remove locale prefix from id (e.g., "en/welcome-to-velocity" -> "welcome-to-velocity")
   const slug = postId.replace('en/', '');
   return `/blog/${slug}`;
@@ -38,21 +35,10 @@ const getPostUrl = (postId: string) => {
 <BaseLayout title="Blog" description="Latest articles and updates">
   <Header
     slot="header"
-    position="fixed"
-    size="lg"
+    position="sticky"
+    size="md"
     showActiveState
-    showCta
-    cta={{ label: 'View Docs', href: 'https://docs.deployvelocity.com' }}
-    extraNav={[{ label: 'Features', href: '#features' }]}
-    actions={[
-      {
-        icon: 'github',
-        href: 'https://github.com/southwellmedia/velocity',
-        label: 'View on GitHub',
-        iconOnly: true,
-        target: '_blank',
-      },
-    ]}
+    showCta={false}
   />
 
   <Hero layout="split" size="sm" class="bg-surface-secondary border-b border-border">
@@ -86,7 +72,6 @@ const getPostUrl = (postId: string) => {
                 href={getPostUrl(post.id)}
                 publishedAt={post.data.publishedAt}
                 tags={post.data.tags}
-                author={post.data.author}
                 image={post.data.image}
                 featured={true}
               />
@@ -116,7 +101,6 @@ const getPostUrl = (postId: string) => {
                 href={getPostUrl(post.id)}
                 publishedAt={post.data.publishedAt}
                 tags={post.data.tags}
-                author={post.data.author}
                 image={post.data.image}
               />
             ))}
@@ -133,25 +117,14 @@ const getPostUrl = (postId: string) => {
     </div>
   </section>
 
-  <!-- Newsletter CTA Section -->
-  <CTA variant="invert" size="sm" maxWidth="lg">
-    <h2 slot="heading">Subscribe</h2>
-    <p slot="description">Get the latest articles and updates delivered to your inbox.</p>
-
-    <form class="mx-auto flex max-w-md flex-col items-center gap-4 sm:flex-row">
-      <Input
-        type="email"
-        placeholder="Enter your email"
-        size="lg"
-        required
-        class="flex-1"
-      />
-      <Button size="lg" type="submit">
-        Subscribe
-        <Icon name="arrow-right" size="sm" />
-      </Button>
-    </form>
-  </CTA>
-
-  <Footer slot="footer" layout="simple" background="secondary" showCopyright={false} />
+  <Footer
+    slot="footer"
+    layout="simple"
+    copyright="© {year} Laurent Van Dessel. All rights reserved."
+    socialLinks={[
+      { platform: 'twitter', href: 'https://x.com/laurent_vd', label: 'Twitter' },
+      { platform: 'github', href: 'https://github.com/lorro', label: 'GitHub' },
+    ]}
+    hideLogo={true}
+  />
 </BaseLayout>

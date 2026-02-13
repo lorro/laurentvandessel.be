@@ -1,16 +1,7 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import { generateId } from '@/lib/utils';
 import { textareaVariants } from './textarea.variants';
-
-interface Props extends HTMLAttributes<'textarea'> {
-  label?: string;
-  error?: string;
-  hint?: string;
-  size?: 'sm' | 'md' | 'lg';
-  rows?: number;
-}
 
 const {
   label,

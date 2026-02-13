@@ -1,19 +1,7 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import { generateId } from '@/lib/utils';
 import { inputVariants, inputSizeConfig } from './input.variants';
-
-interface Props extends HTMLAttributes<'input'> {
-  label?: string;
-  error?: string;
-  hint?: string;
-  size?: 'sm' | 'md' | 'lg';
-  /** Icon name to display at the start of the input */
-  leadingIcon?: string;
-  /** Icon name to display at the end of the input */
-  trailingIcon?: string;
-}
 
 const { label, error, hint, size = 'md', leadingIcon, trailingIcon, class: className, id, ...attrs } = Astro.props;
 

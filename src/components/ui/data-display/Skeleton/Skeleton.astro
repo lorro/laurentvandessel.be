@@ -3,16 +3,8 @@
  * Skeleton Component
  * Loading placeholder with pulse animation
  */
-import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
 import { skeletonVariants } from './skeleton.variants';
-
-interface Props extends HTMLAttributes<'div'> {
-  variant?: 'default' | 'circular' | 'text';
-  width?: string;
-  height?: string;
-  animated?: boolean;
-}
 
 const {
   variant = 'default',

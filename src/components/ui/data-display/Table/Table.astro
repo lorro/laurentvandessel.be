@@ -3,26 +3,7 @@
  * Table Component
  * A styled data table with hover rows and responsive design.
  */
-import type { HTMLAttributes } from 'astro/types';
 import { cn } from '@/lib/cn';
-
-interface Column {
-  key: string;
-  label: string;
-  align?: 'left' | 'center' | 'right';
-  class?: string;
-}
-
-interface Props extends HTMLAttributes<'div'> {
-  columns: Column[];
-  rows: Record<string, unknown>[];
-  /** Enable row hover highlighting */
-  hoverable?: boolean;
-  /** Enable row striping */
-  striped?: boolean;
-  /** Make table compact */
-  compact?: boolean;
-}
 
 const {
   columns,
